@@ -1,0 +1,2 @@
+####
+GET http://localhost:3000/api/food-data?imageUrl=./Images/sam2.jpg
