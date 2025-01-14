@@ -10,6 +10,6 @@ class TextExtractor {
             throw new Error("Failed to extract text from the image.");
         }
     }
-}
+} 
 
 module.exports = TextExtractor;

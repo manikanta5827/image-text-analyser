@@ -13,19 +13,22 @@ app.use(morgan('dev'));
 
 // API Route
 app.get("/api/food-data", async (req, res) => {
-    const { imageUrl } = req.query;
+    const { imageUrl, includeDetails } = req.query;
 
     if (!imageUrl) {
         return res.status(400).json({ error: "Missing 'imageUrl' query parameter." });
     }
 
     try {
-        const structuredData = await FoodDataController.processFoodData(imageUrl);
+        // Ensure includeDetails is a boolean
+        const includeDetailsFlag = includeDetails === "true";
+        const structuredData = await FoodDataController.processFoodData(imageUrl, includeDetailsFlag);
         res.status(200).json(structuredData);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 // Start the server
 app.listen(PORT, () => {
