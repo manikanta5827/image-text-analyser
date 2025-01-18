@@ -8,8 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
-app.use(morgan('dev'));
-
+app.use(morgan("dev"));
 
 // API Route
 app.get("/api/food-data", async (req, res) => {
@@ -22,13 +21,15 @@ app.get("/api/food-data", async (req, res) => {
     try {
         // Ensure includeDetails is a boolean
         const includeDetailsFlag = includeDetails === "true";
-        const structuredData = await FoodDataController.processFoodData(imageUrl, includeDetailsFlag);
+        const structuredData = await FoodDataController.processFoodData(
+            imageUrl,
+            includeDetailsFlag
+        );
         res.status(200).json(structuredData);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
-
 
 // Start the server
 app.listen(PORT, () => {
